@@ -12,11 +12,11 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class EditorActivity extends AppCompatActivity {
+public class  EditorActivity extends AppCompatActivity {
 
     private String action;
     private EditText editor;
-    private String notefilter;
+    private String noteFilter;
     private String oldText;
 
     @Override
@@ -35,10 +35,10 @@ public class EditorActivity extends AppCompatActivity {
             setTitle(getString(R.string.new_note));
         } else {
             action = Intent.ACTION_EDIT;
-            notefilter = DBOpenHelper.NOTE_ID + "=" + uri.getLastPathSegment();
+            noteFilter = DBOpenHelper.NOTE_ID + "=" + uri.getLastPathSegment();
 
             Cursor cursor = getContentResolver().query(uri,
-                    DBOpenHelper.ALL_COLUMNS, notefilter, null, null);
+                    DBOpenHelper.ALL_COLUMNS, noteFilter, null, null);
             cursor.moveToFirst();
             oldText = cursor.getString(cursor.getColumnIndex(DBOpenHelper.NOTE_TEXT));
             editor.setText(oldText);
@@ -59,23 +59,22 @@ public class EditorActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-       switch (item.getItemId()){
-           case android.R.id.home:
-               finishEditing();
-               break;
-           case R.id.action_delete:
-               deleteNote();
-               break;
-       }
-
+        switch (id) {
+            case android.R.id.home:
+                finishEditing();
+                break;
+            case R.id.action_delete:
+                deleteNote();
+                break;
+        }
 
         return true;
     }
-
     private void deleteNote() {
         getContentResolver().delete(NotesProvider.CONTENT_URI,
-                notefilter, null);
-        Toast.makeText(this, R.string.note_deleted, Toast.LENGTH_SHORT).show();
+                noteFilter, null);
+        Toast.makeText(this, getString(R.string.note_deleted),
+                Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
         finish();
     }
@@ -90,8 +89,9 @@ public class EditorActivity extends AppCompatActivity {
                 } else {
                     insertNote(newText);
                 }
+                break;
             case Intent.ACTION_EDIT:
-                if(newText.length() == 0) {
+                if (newText.length() == 0) {
                     deleteNote();
                 } else if (oldText.equals(newText)) {
                     setResult(RESULT_CANCELED);
@@ -106,7 +106,7 @@ public class EditorActivity extends AppCompatActivity {
     private void updateNote(String noteText) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.NOTE_TEXT, noteText);
-        getContentResolver().update(NotesProvider.CONTENT_URI, values, notefilter, null);
+        getContentResolver().update(NotesProvider.CONTENT_URI, values, noteFilter, null);
         Toast.makeText(this, R.string.note_updated, Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
     }
