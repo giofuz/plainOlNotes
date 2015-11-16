@@ -26,6 +26,7 @@ implements LoaderManager.LoaderCallbacks<Cursor>
 {
     private static final int EDITOR_REQUEST_CODE = 1001;
     private CursorAdapter cursorAdapter;
+    //some changes for github
 
    // @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
