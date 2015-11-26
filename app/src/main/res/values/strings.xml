@@ -1,15 +1,16 @@
 <resources>
-    <string name="app_name">PlainOlNotes</string>
+    <string name="app_name">Stock Taking</string>
     <string name="create_sample_data">Create sample data</string>
     <string name="delete_all_notes">delete all notes</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="all_deleted">All notes deleted</string>
     <string name="title_activity_editor">EditorActivity</string>
-
     <string name="new_note">New Note</string>
     <string name="note_updated">Note Updated</string>
     <string name="action_delete">action_delete</string>
     <string name="note_deleted">Note deleted</string>
     <string name="enter_note_here">Enter note here</string>
+    <string name="enter_number">Enter a number</string>
+    <string name="enter_date">YYYY-MM-DD</string>
 
 </resources>

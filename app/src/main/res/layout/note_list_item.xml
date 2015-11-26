@@ -15,14 +15,57 @@
         android:id="@+id/tvNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="4dp"
-        android:layout_toEndOf="@+id/imageDocIcon"
         android:layout_toRightOf="@+id/imageDocIcon"
         android:singleLine="true"
         android:text="Dummy Text"
         android:textColor="@color/list_item_text"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tvNote2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="Dummy Text"
+        android:textColor="@color/list_item_text"
+        android:textSize="12sp"
+        android:layout_below="@+id/imageDocIcon"
+        android:layout_toRightOf="@+id/tvNote"
+        android:layout_toEndOf="@+id/tvNote" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tvNote3"
+        android:layout_alignBottom="@+id/tvNote2"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantity"
+        android:id="@+id/textView"
+        android:textSize="10sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/tvNote"
+        android:layout_above="@+id/tvNote2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expires:"
+        android:id="@+id/textView5"
+        android:textSize="10sp"
+        android:layout_alignBaseline="@+id/tvNote3"
+        android:layout_alignBottom="@+id/tvNote3"
+        android:layout_alignLeft="@+id/tvNote"
+        android:layout_alignStart="@+id/tvNote" />
+
 
 </RelativeLayout>
