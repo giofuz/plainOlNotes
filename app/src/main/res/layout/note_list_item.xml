@@ -32,9 +32,9 @@
         android:text="Dummy Text"
         android:textColor="@color/list_item_text"
         android:textSize="12sp"
+        android:layout_toEndOf="@+id/textView5"
         android:layout_below="@+id/imageDocIcon"
-        android:layout_toRightOf="@+id/tvNote"
-        android:layout_toEndOf="@+id/tvNote" />
+        android:layout_toRightOf="@+id/textView5" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quantity"
+        android:text="@string/quantity"
         android:id="@+id/textView"
         android:textSize="10sp"
         android:layout_alignParentRight="true"
@@ -59,7 +59,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Expires:"
+        android:text="@string/expire"
         android:id="@+id/textView5"
         android:textSize="10sp"
         android:layout_alignBaseline="@+id/tvNote3"

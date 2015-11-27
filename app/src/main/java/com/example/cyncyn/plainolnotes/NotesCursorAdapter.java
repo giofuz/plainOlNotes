@@ -47,7 +47,7 @@ public class NotesCursorAdapter extends CursorAdapter {
 
 
         String noteText3 = cursor.getString(
-                cursor.getColumnIndex(DBOpenHelper.NOTE_NUM));
+                cursor.getColumnIndex(DBOpenHelper.NOTE_QUANTITY));
         int pos3 = noteText3.indexOf(10);
         if(pos3 != -1){
             noteText3 = noteText.substring(0, pos) + " ...";

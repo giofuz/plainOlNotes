@@ -10,7 +10,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editProduct"
         android:gravity="top"
         android:hint="@string/enter_note_here"
         android:inputType="textMultiLine|textCapSentences"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/editNumber"
         android:hint="@string/enter_number"
         android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/editExpiry"
         android:hint="@string/enter_date"
         android:layout_below="@+id/textView4"
         android:layout_alignParentLeft="true"
@@ -43,47 +43,67 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Item:"
+        android:text="@string/item"
         android:id="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignRight="@+id/editProduct"
+        android:layout_alignEnd="@+id/editProduct" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quantity"
+        android:text="@string/quantity"
         android:id="@+id/textView3"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/editProduct"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Expiry date"
+        android:text="@string/expiry_date"
         android:id="@+id/textView4"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/editNumber"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Frozen food"
+        android:text="@string/fresh_food"
         android:id="@+id/checkBox1"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/editExpiry"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fresh food"
+        android:text="@string/frozen_food"
         android:id="@+id/checkBox"
         android:layout_below="@+id/checkBox1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email_address"
+        android:ems="10"
+        android:id="@+id/editEmail"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sup_email_add"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/checkBox"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

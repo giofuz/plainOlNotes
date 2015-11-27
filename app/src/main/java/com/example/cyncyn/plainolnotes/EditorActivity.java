@@ -19,12 +19,13 @@ public class  EditorActivity extends AppCompatActivity {
     private String action;
     private String noteFilter;
 
-    private String oldText;
-    private String oldNum;
-    private String oldExp;
-
     private EditText editor;
-    private EditText editorNum;
+    private String oldText;
+
+    private String oldQunatity;
+    private EditText editorQuantity;
+
+    private String oldExp;
     private EditText editorExp;
 
     private CheckBox editorCheck;
@@ -33,6 +34,8 @@ public class  EditorActivity extends AppCompatActivity {
     private CheckBox editorCheck2;
     private int oldCheck2 = -1;
 
+    private String oldEmail;
+    private EditText editorEmail;
 
 
     @Override
@@ -40,11 +43,12 @@ public class  EditorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
-        editor = (EditText) findViewById(R.id.editText);
-        editorNum = (EditText) findViewById(R.id.editText2);
-        editorExp = (EditText) findViewById(R.id.editText3);
+        editor = (EditText) findViewById(R.id.editProduct);
+        editorQuantity = (EditText) findViewById(R.id.editNumber);
+        editorExp = (EditText) findViewById(R.id.editExpiry);
         editorCheck = (CheckBox) findViewById(R.id.checkBox1);
         editorCheck2 = (CheckBox) findViewById(R.id.checkBox);
+        editorEmail = (EditText) findViewById(R.id.editEmail);
 
 
         Intent intent = getIntent();
@@ -65,29 +69,30 @@ public class  EditorActivity extends AppCompatActivity {
             editor.setText(oldText);
             editor.requestFocus();
 
-            oldNum = cursor.getString(cursor.getColumnIndex(DBOpenHelper.NOTE_NUM));
-            editorNum.setText(oldNum);
+            oldQunatity = cursor.getString(cursor.getColumnIndex(DBOpenHelper.NOTE_QUANTITY));
+            editorQuantity.setText(oldQunatity);
 
             oldExp = cursor.getString(cursor.getColumnIndex(DBOpenHelper.NOTE_EXPIRY));
             editorExp.setText(oldExp);
 
             oldCheck = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.NOTE_CHECK));
             if(oldCheck == 1 ){
-                editorCheck.setChecked(true);
-            }
-            else if (oldCheck == 0)
-            {
-                editorCheck.setChecked(false);
-            }
+                    editorCheck.setChecked(true);
+                }
+            else if (oldCheck == 0) {
+                    editorCheck.setChecked(false);
+                }
 
             oldCheck2 = cursor.getInt(cursor.getColumnIndex(DBOpenHelper.NOTE_CHECK2));
             if(oldCheck2 == 1 ){
-                editorCheck2.setChecked(true);
-            }
-            else if (oldCheck2 == 0)
-            {
-                editorCheck2.setChecked(false);
-            }
+                    editorCheck2.setChecked(true);
+                }
+            else if (oldCheck2 == 0) {
+                    editorCheck2.setChecked(false);
+                }
+
+            oldEmail = cursor.getString(cursor.getColumnIndex(DBOpenHelper.NOTE_EMAIL));
+            editorEmail.setText(oldEmail);
         }
 
     }
@@ -127,31 +132,28 @@ public class  EditorActivity extends AppCompatActivity {
     private void finishEditing() {
         String newText = editor.getText().toString().trim();
         String newExp = editorExp.getText().toString().trim();
+        String newEmail = editorEmail.getText().toString().trim();
+        String newQuantity = editorQuantity.getText().toString().trim();
 
-        int newNum;
-        String noteNum = editorNum.getText().toString().trim();
-        newNum = Integer.parseInt(noteNum);
+        //int newNum;
+        //newNum = Integer.parseInt(noteNum);
 
         int newCheck = oldCheck;
-        if (editorCheck.isChecked())
-        {
-            newCheck = 1;
-        }
-        else if (!editorCheck.isChecked())
-        {
-            newCheck = 0;
-        }
+        if (editorCheck.isChecked()) {
+                newCheck = 1;
+            }
+        else if (!editorCheck.isChecked()) {
+                newCheck = 0;
+            }
 
         int newCheck2 = oldCheck2;
 
-        if (editorCheck2.isChecked())
-        {
-            newCheck2 = 1;
-        }
-        else if (!editorCheck2.isChecked())
-        {
-            newCheck2 = 0;
-        }
+        if (editorCheck2.isChecked()) {
+                newCheck2 = 1;
+            }
+        else if (!editorCheck2.isChecked()) {
+                newCheck2 = 0;
+            }
 
         boolean finished = true;
 
@@ -159,55 +161,62 @@ public class  EditorActivity extends AppCompatActivity {
         switch (action) {
             case Intent.ACTION_INSERT:
                 Log.i("Test","ACTION INSERT");
-                if (newText.length() == 0 && newNum < 0 && newCheck == -1 && newCheck2 == -1) {
+                if (newText.length() == 0 || newQuantity.length() == 0 || newCheck == -1 || newCheck2 == -1 || newEmail.length() == 0
+                        || newExp.length() == 0) {
                     finished = false;
+                    Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    Log.i("Test", "insert failed");
                     setResult(RESULT_CANCELED);
                 }
                 else {
-                    insertNote(newText, newNum, newExp, newCheck, newCheck2);
+                    Log.i("Test", "inserted");
+                    insertNote(newText, newQuantity, newExp, newCheck, newCheck2, newEmail);
                 }
                 break;
 
             case Intent.ACTION_EDIT:
                 Log.i("Test","ACTION EDIT");
-                if (newText.length() == 0 && newNum < 0 && newCheck == 0 && newCheck2 == 0) {
-                    finished = false;
+                if (newText.length() == 0 && newQuantity.length() ==0 && newCheck == 0 && newExp.length() ==0 && newCheck2 == 0 && newEmail.length() == 0) {
                     deleteNote();
                     Log.i("Test", "delete");
-                } else if (newText.length() == 0 || newNum < 0 || oldCheck == newCheck || oldCheck2 == newCheck2) {
+                } else if (newText == oldText && newExp == oldExp && oldCheck == newCheck && oldCheck2 == newCheck2 && newEmail == oldEmail) {
+                    setResult(RESULT_CANCELED);
+                    Log.i("Test", "cancel");
+                }
+                else if(newText.length() == 0 || newQuantity.length() ==0 || newEmail.length()==0 || newExp.length() == 0){
                     finished = false;
                     Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                    setResult(RESULT_CANCELED);
-                    Log.i("Test", "cancel" + newNum);
-                } else {
-
-                    updateNote(newText, newNum, newExp, newCheck, newCheck2);
-                    Log.i("Test", "updated " + newNum);
+                }
+                else {
+                    updateNote(newText, newQuantity, newExp, newCheck, newCheck2, newEmail);
+                    Log.i("Test", "updated " + newQuantity);
                 }
 
         }
         if(finished)finish();
     }
 
-    private void updateNote(String noteText, int newNum, String newExp, int newCheck, int newCheck2) {
+    private void updateNote(String noteText, String newQuantity, String newExp, int newCheck, int newCheck2, String newEmail) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.NOTE_TEXT, noteText);
-        values.put(DBOpenHelper.NOTE_NUM, newNum);
+        values.put(DBOpenHelper.NOTE_QUANTITY, newQuantity);
         values.put(DBOpenHelper.NOTE_EXPIRY, newExp);
         values.put(DBOpenHelper.NOTE_CHECK, newCheck);
         values.put(DBOpenHelper.NOTE_CHECK2, newCheck2);
+        values.put(DBOpenHelper.NOTE_EMAIL, newEmail);
         getContentResolver().update(NotesProvider.CONTENT_URI, values, noteFilter, null);
-        Toast.makeText(this, R.string.note_updated, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, R.string.note_updated, Toast.LENGTH_SHORT).show();
         setResult(RESULT_OK);
     }
 
-    private void insertNote(String noteText, int newNum, String newExp, int newCheck, int newCheck2) {
+    private void insertNote(String noteText, String newQuantity, String newExp, int newCheck, int newCheck2, String newEmail) {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.NOTE_TEXT, noteText);
-        values.put(DBOpenHelper.NOTE_NUM, newNum);
+        values.put(DBOpenHelper.NOTE_QUANTITY, newQuantity);
         values.put(DBOpenHelper.NOTE_EXPIRY, newExp);
         values.put(DBOpenHelper.NOTE_CHECK, newCheck);
         values.put(DBOpenHelper.NOTE_CHECK2, newCheck2);
+        values.put(DBOpenHelper.NOTE_EMAIL, newEmail);
         getContentResolver().insert(NotesProvider.CONTENT_URI, values);
         setResult(RESULT_OK);
     }

@@ -8,30 +8,32 @@ public class DBOpenHelper extends SQLiteOpenHelper{
 
     //Constants for db name and version
     private static final String DATABASE_NAME = "notes.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
 
     //Constants for identifying table and columns
     public static final String TABLE_NOTES = "notes";
     public static final String NOTE_ID = "_id";
     public static final String NOTE_TEXT = "noteText";
     public static final String NOTE_CREATED = "noteCreated";
-    public static final String NOTE_NUM = "noteNum";
+    public static final String NOTE_QUANTITY = "noteQnty";
     public static final String NOTE_EXPIRY = "noteExp";
     public static final String NOTE_CHECK = "noteCheck";
     public static final String NOTE_CHECK2 = "noteCheck2";
+    public static final String NOTE_EMAIL = "noteEmail";
 
     public static final String[] ALL_COLUMNS =
-            {NOTE_ID, NOTE_TEXT, NOTE_NUM, NOTE_CREATED, NOTE_EXPIRY, NOTE_CHECK, NOTE_CHECK2};
+            {NOTE_ID, NOTE_TEXT, NOTE_QUANTITY, NOTE_CREATED, NOTE_EXPIRY, NOTE_CHECK, NOTE_CHECK2, NOTE_EMAIL};
 
     //SQL to create table
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NOTES + " (" +
                     NOTE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     NOTE_TEXT + " TEXT, " +
-                    NOTE_NUM + " INTEGER, " +
+                    NOTE_QUANTITY + " TEXT, " +
                     NOTE_EXPIRY + " TEXT, " +
                     NOTE_CHECK + " INTEGER, " +
                     NOTE_CHECK2 + " INTEGER, " +
+                    NOTE_EMAIL + " TEXT, " +
                     NOTE_CREATED + " TEXT default CURRENT_TIMESTAMP" +
                     ")";
 

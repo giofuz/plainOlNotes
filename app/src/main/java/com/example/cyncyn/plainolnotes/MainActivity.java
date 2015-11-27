@@ -61,11 +61,16 @@ implements LoaderManager.LoaderCallbacks<Cursor>
 
 
 
-    private void insertNote(String noteText, int noteNum, String noteExpiry) {
+    private void insertNote(String noteText, String noteQuantity, String noteExpiry, int noteCheck, int noteCheck2,
+                                String noteEmail)
+    {
         ContentValues values = new ContentValues();
         values.put(DBOpenHelper.NOTE_TEXT, noteText);
-        values.put(DBOpenHelper.NOTE_NUM, noteNum);
+        values.put(DBOpenHelper.NOTE_QUANTITY, noteQuantity);
         values.put(DBOpenHelper.NOTE_EXPIRY, noteExpiry);
+        values.put(DBOpenHelper.NOTE_CHECK, noteCheck);
+        values.put(DBOpenHelper.NOTE_CHECK2, noteCheck2);
+        values.put(DBOpenHelper.NOTE_EMAIL, noteEmail);
         Uri noteUri = getContentResolver().insert(NotesProvider.CONTENT_URI,
                 values);
 
@@ -124,9 +129,8 @@ implements LoaderManager.LoaderCallbacks<Cursor>
     }
 
     private void insertSampleData() {
-        insertNote("Fish", 0, "YYYY-MM-DD");
-        insertNote("Burgers:\n1/4 pounders", 2, "YYYY-MM-DD");
-        insertNote("This is an item that has been this continued due to bad sales - Pies", 8, "YYYY-MM-DD");
+        insertNote("Fish", "50", "2015-10-09", 0, 1, "example@gmial.com");
+        insertNote("Burgers:\n1/4 pounders", "100", "2015-07-10", 1, 0, "example@gmial.com");
         restartLoader();
     }
 

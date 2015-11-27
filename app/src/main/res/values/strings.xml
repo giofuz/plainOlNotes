@@ -4,13 +4,21 @@
     <string name="delete_all_notes">delete all notes</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="all_deleted">All notes deleted</string>
-    <string name="title_activity_editor">EditorActivity</string>
+    <string name="title_activity_editor">Edit Note</string>
     <string name="new_note">New Note</string>
     <string name="note_updated">Note Updated</string>
-    <string name="action_delete">action_delete</string>
+    <string name="action_delete">action delete</string>
     <string name="note_deleted">Note deleted</string>
     <string name="enter_note_here">Enter note here</string>
     <string name="enter_number">Enter a number</string>
     <string name="enter_date">YYYY-MM-DD</string>
+    <string name="email_address">Email address</string>
+    <string name="sup_email_add">Suppliers email address</string>
+    <string name="fresh_food">Fresh food</string>
+    <string name="frozen_food">Frozen food</string>
+    <string name="expiry_date">Expiry date</string>
+    <string name="quantity">Quantity</string>
+    <string name="item">Item:</string>
+    <string name="expire">Expire:</string>
 
 </resources>
